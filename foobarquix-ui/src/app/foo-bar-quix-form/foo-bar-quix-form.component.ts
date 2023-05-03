@@ -1,14 +1,20 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-foo-bar-quix-form',
   templateUrl: './foo-bar-quix-form.component.html'
 })
 export class FooBarQuixFormComponent implements OnInit {
+  @Output()
+  submitNumberOutput: EventEmitter<Number> = new EventEmitter<Number>();
+
+  inputNumberForm = this.formBuilder.group({
+    inputNumber: new FormControl(null, Validators.required),
+  });
 
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
 
   }
 
@@ -16,6 +22,10 @@ export class FooBarQuixFormComponent implements OnInit {
   }
 
   submitNumber(): void {
+    const value: Number = this.inputNumberForm.value.inputNumber;
+    if(value) {
+      this.submitNumberOutput.emit(value);
+    }
   }
 
 }

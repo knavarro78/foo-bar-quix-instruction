@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FooBarQuixService } from '../foo-bar-quix.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FooBarQuixService} from '../foo-bar-quix.service';
+import {subscribeToResult} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-foo-bar-quix',
@@ -8,7 +8,10 @@ import { FooBarQuixService } from '../foo-bar-quix.service';
 })
 export class FooBarQuixComponent implements OnInit, OnDestroy {
 
-  constructor(private fooBarQuixService: FooBarQuixService) { }
+  results: string[] = [];
+
+  constructor(private fooBarQuixService: FooBarQuixService) {
+  }
 
   ngOnInit(): void {
   }
@@ -17,6 +20,11 @@ export class FooBarQuixComponent implements OnInit, OnDestroy {
   }
 
   convertNumber(inputNumber: number): void {
+    this.fooBarQuixService.convert(inputNumber).subscribe(data => {
+      if (data.result) {
+        this.results.push(`${inputNumber} and the result is ${data.result}`);
+      }
+    })
   }
 
 }

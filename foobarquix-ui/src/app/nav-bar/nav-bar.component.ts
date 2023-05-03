@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ItemWithPath } from '../model/nav-item';
+import {Component, OnInit} from '@angular/core';
+import {ItemWithPath} from '../model/nav-item';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +7,13 @@ import { ItemWithPath } from '../model/nav-item';
 })
 export class NavBarComponent implements OnInit {
 
-  navItems: ItemWithPath[] = [{text: 'Accueil', path: 'home'}];
+  navItems: ItemWithPath[] = [
+    {text: 'Accueil', path: 'home'},
+    {text: 'Foo Bar Quix', path: 'foobarquix'}
+  ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,3 +1,5 @@
+// Prod configuration
 export const environment = {
-  production: true
+  production: true,
+  api: "http://PROD_DOMAIN"
 };
